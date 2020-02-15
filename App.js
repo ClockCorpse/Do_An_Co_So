@@ -5,12 +5,15 @@ import {
   Text,
   TextInput,
   Button,
+  Image,
 } from 'react-native';
 
 export default function App(){
   return (
     <View style={styles.container}>
       <View style={styles.box}>
+        <Image source={require('./logo_DLU.png')} />
+        <Text>---------- -*- ----------</Text>
         <TextInput 
         style={styles.input}
         placeholder='MSSV'
