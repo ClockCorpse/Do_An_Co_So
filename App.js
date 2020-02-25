@@ -1,35 +1,89 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Button,
-  Image,
-} from 'react-native';
-
-export default function App(){
-  return (
-    <View style={styles.container}>
-      <View style={styles.box}>
+import React, { Component } from 'react';
+ 
+import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image } from 'react-native';
+ 
+export default class App extends Component {
+ 
+  constructor(props) {
+    super(props)
+ 
+    this.state = {
+      name: '',
+      mssv: '',
+      password: ''
+    }
+  }
+ 
+  login_Function = () => {
+ 
+    fetch('http://loiddns.ddns.net/login_api.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+ 
+ 
+        mssv: this.state.mssv,
+ 
+        user_password: this.state.password
+ 
+      })
+ 
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        
+          Alert.alert(responseJson);
+        
+        // Showing response message coming from server after inserting records.
+        
+      }).catch((error) => {
+        console.error(error);
+      });
+ 
+ 
+  }
+ 
+  render() {
+    return (
+ 
+      <View style={styles.container}>
+        <View style={styles.box}>
         <Image source={require('./logo_DLU.png')} />
-        <Text>---------- -*- ----------</Text>
-        <TextInput 
-        style={styles.input}
-        placeholder='MSSV'
-        keyboardType='numeric' />
+         <Text>---------- -*- ----------</Text>
+
         <TextInput
-        style={styles.input}
-        placeholder='Mật khẩu'/>
-        <View style={styles.buttonContainer}>
-          <Button
-          style={styles.buttonContainer}
-          title='Đăng nhập'/>
+          placeholder="MSSV"
+          onChangeText={data => this.setState({ mssv: data })}
+          underlineColorAndroid='transparent'
+          style={styles.input}
+          keyboardType='numeric'
+        />
+ 
+        <TextInput
+          placeholder="Mật khẩu"
+          onChangeText={data => this.setState({ password: data })}
+          underlineColorAndroid='transparent'
+          style={styles.input}
+          secureTextEntry={true}
+        />
+ 
+        <TouchableOpacity style={styles.buttonContainer} onPress={this.login_Function} >
+ 
+          <Text style={styles.text}>Đăng nhập </Text>
+ 
+        </TouchableOpacity>
         </View>
+ 
       </View>
-    </View>
-  );
+ 
+    );
+  }
 }
+ 
+
+
 
 const styles = StyleSheet.create({
   container:{
@@ -56,5 +110,18 @@ const styles = StyleSheet.create({
   buttonContainer:{
     width:250,
     margin:10,
+    backgroundColor: '#24A0DE',
+    borderRadius:5
   },
+  text:{
+    padding:8,
+    color:'#fff',
+    textAlign:'center'
+  },
+  TextComponentStyle: {
+    fontSize: 20,
+   color: "#000",
+   textAlign: 'center', 
+   marginBottom: 15
+  }
 });
