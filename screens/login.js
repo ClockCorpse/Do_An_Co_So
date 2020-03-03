@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
  
-import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image } from 'react-native';
+import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image, } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
  
 export default class App extends Component {
  
@@ -13,10 +14,13 @@ export default class App extends Component {
       password: ''
     }
   }
- 
+  
+
+
   login_Function = () => {
- 
-    fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
+    NetInfo.fetch().then(state=>{
+      if(state.isConnected === true){
+        fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -43,6 +47,11 @@ export default class App extends Component {
       }).catch((error) => {
         console.error(error);
       });
+      }else{
+        Alert.alert('No connection to the internet');
+      }
+    });
+    
  
  
   }
