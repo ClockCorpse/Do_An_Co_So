@@ -13,6 +13,9 @@ const screens = {
     },
     Profile:{
         screen: profile,
+        navigationOptions:{
+            headerShown:false,
+        }
     },
     
 }

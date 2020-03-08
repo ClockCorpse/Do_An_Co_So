@@ -2,6 +2,7 @@ import React, { Component } from 'react';
  
 import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image, } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
+import AsyncStorage from '@react-native-community/async-storage';
  
 export default class App extends Component {
  
@@ -18,44 +19,50 @@ export default class App extends Component {
 
 
   login_Function = () => {
+
+    //Check Internet connection before attempting to fetch api
     NetInfo.fetch().then(state=>{
       if(state.isConnected === true){
+        // If theres a connection then fetch the api
         fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
       method: 'POST',
+      //Create Json
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
  
- 
         mssv: this.state.mssv,
- 
         user_password: this.state.password
  
       })
  
-    }).then((response) => response.json())
+    }).then((response) => response.json()) //get Json response
       .then((responseJson) => {
-            if(responseJson === 'Matched'){
+            if(responseJson.result === 'Matched'){//If it matches then navigate to profile activity
+                var username = responseJson.user_name;
+                var mssv = responseJson.mssv;
+                AsyncStorage.setItem('name',username);
+                AsyncStorage.setItem('mssv',mssv);
                 this.props.navigation.push('Profile');
+            
             }else{
-                Alert.alert(responseJson);
+                Alert.alert(responseJson);//if not then alert the user
             }
-        // Showing response message coming from server after inserting records.
         
       }).catch((error) => {
         console.error(error);
       });
       }else{
-        Alert.alert('No connection to the internet');
+        Alert.alert('No connection to the internet');//if there's no connection to the Internet then alert the user
       }
     });
     
  
  
   }
- 
+ //front end stuffs from here
   render() {
     return (
  
