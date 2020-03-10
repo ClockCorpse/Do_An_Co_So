@@ -40,11 +40,16 @@ export default class App extends Component {
  
     }).then((response) => response.json()) //get Json response
       .then((responseJson) => {
+            //Alert.alert(responseJson);
             if(responseJson.result === 'Matched'){//If it matches then navigate to profile activity
                 var username = responseJson.user_name;
                 var mssv = responseJson.mssv;
+                var email = responseJson.email;
+                var lop = responseJson.lop;
                 AsyncStorage.setItem('name',username);
                 AsyncStorage.setItem('mssv',mssv);
+                AsyncStorage.setItem('email',email);
+                AsyncStorage.setItem('lop',lop);
                 this.props.navigation.push('Profile');
             
             }else{

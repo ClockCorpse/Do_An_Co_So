@@ -7,6 +7,8 @@ export default class App extends Component{
     state = {
         username:[],
         mssv:[],
+        email:[],
+        lop:[],
     }
     componentDidMount(){
         this._loadInitialState().done();
@@ -17,16 +19,34 @@ export default class App extends Component{
         this.setState({username:value});
         var value = await AsyncStorage.getItem('mssv');
         this.setState({mssv:value});
+        var value = await AsyncStorage.getItem('email');
+        this.setState({email:value});
+        var value = await AsyncStorage.getItem('lop');
+        this.setState({lop:value});
     }
     render(){
         return(
-            <View style={styles.container}>
-                <Text style={styles.infoHeader}>Tên</Text>
-                <Text style={styles.info}>{this.state.username}</Text>
-                <Text style={styles.infoHeader}>MSSV</Text>
-                <Text style={styles.info}>{this.state.mssv}</Text>
+            <View style={styles.mainContainer}>
+                <View style={styles.container}>
+                    <Text style={styles.infoHeader}>Tên</Text>
+                    <Text style={styles.info}>{this.state.username}</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.infoHeader}>MSSV</Text>
+                    <Text style={styles.info}>{this.state.mssv}</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.infoHeader}>Email</Text>
+                    <Text style={styles.info}>{this.state.email}</Text>
+                </View>
+                <View style={styles.container}>
+                    <Text style={styles.infoHeader}>Lớp</Text>
+                    <Text style={styles.info}>{this.state.lop}</Text>
+                </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.btnPassword}>
+                    <TouchableOpacity 
+                    style={styles.btnPassword}
+                    onPress={()=>this.props.navigation.navigate('ChangePass')}>
                         <Text style={styles.btnPasswordText}>Đổi mật khẩu</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnExit}
@@ -34,15 +54,23 @@ export default class App extends Component{
                         <Text style={styles.btnExitText}>Đăng xuất</Text>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={styles.btnScan}
+                    onPress={()=>this.props.navigation.navigate('Scan')}>
+                        <Text style={styles.btnExitText}>Quét</Text>
+                    </TouchableOpacity>
             </View>
        );
     }
 }
 
 const styles = StyleSheet.create({
-    container:{
+    mainContainer:{
         flex:1,
         padding:30,
+    },
+    container:{
+        borderBottomColor:"#ccc",
+        borderBottomWidth: 1,
     },
     infoHeader:{
         color:'#609810',
@@ -54,7 +82,7 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     footer:{
-        marginTop:30,
+        marginTop:75,
         flexDirection:"row",
         justifyContent:'center'
     },
@@ -79,6 +107,11 @@ const styles = StyleSheet.create({
     btnPasswordText:{
         textAlign:'center',
         color:'#24a0de'
+    },
+    btnScan:{
+        backgroundColor:"#609810",
+        borderRadius:5,
+        marginTop:20,
+        padding:7,
     }
-
 });

@@ -2,6 +2,8 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer, createNavigator} from 'react-navigation';
 import login from '../screens/login';
 import profile from '../screens/profile';
+import chgpass from '../screens/changepass';
+import scan from '../screens/scan';
 
 const screens = {
     
@@ -16,6 +18,15 @@ const screens = {
         navigationOptions:{
             headerShown:false,
         }
+    },
+    ChangePass:{
+        screen: chgpass,
+        navigationOptions:{
+            headerShown:false,
+        }
+    },
+    Scan:{
+        screen: scan,
     },
     
 }
