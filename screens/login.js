@@ -1,32 +1,42 @@
 import React, { Component } from 'react';
  
-import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image, } from 'react-native';
+import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image,ToastAndroid, } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
-import AsyncStorage from '@react-native-community/async-storage';
- 
+import AsyncStorage from '@react-native-community/async-storage'; 
+import { Base64 } from 'js-base64'
+
+
+
 export default class App extends Component {
- 
+  
   constructor(props) {
     super(props)
  
     this.state = {
       name: '',
       mssv: '',
-      password: ''
+      password: '',
+      encrypted:'',
+
     }
   }
+
+  // Encrypt the user's password before sending it to the server
+  encrypt_password=()=>{
+    var temp = Base64.encode(this.state.password);
+    this.setState({encrypted:temp});
+  }
   
-
-
   login_Function = () => {
-
+    Alert.alert('Please wait');// To prevent the user from spamming the login button
+    this.encrypt_password();
     //Check Internet connection before attempting to fetch api
     NetInfo.fetch().then(state=>{
       if(state.isConnected === true){
         // If theres a connection then fetch the api
         fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
       method: 'POST',
-      //Create Json
+      //Create JSON
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -34,13 +44,13 @@ export default class App extends Component {
       body: JSON.stringify({
  
         mssv: this.state.mssv,
-        user_password: this.state.password
+        user_password: this.state.encrypted
  
       })
  
     }).then((response) => response.json()) //get Json response
       .then((responseJson) => {
-            //Alert.alert(responseJson);
+            //Alert.alert(responseJson); for debugging purpose
             if(responseJson.result === 'Matched'){//If it matches then navigate to profile activity
                 var username = responseJson.user_name;
                 var mssv = responseJson.mssv;
@@ -51,7 +61,6 @@ export default class App extends Component {
                 AsyncStorage.setItem('email',email);
                 AsyncStorage.setItem('lop',lop);
                 this.props.navigation.push('Profile');
-            
             }else{
                 Alert.alert(responseJson);//if not then alert the user
             }

@@ -18,7 +18,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { RNCamera } from 'react-native-camera';
-
+ 
+//Once the QR code is detected, navigate to the confirmation screen with the information extracted from the code
 barcodeRecognized = ({ barcodes }) => {
   barcodes.forEach(barcode => ToastAndroid.show(barcode.data,ToastAndroid.SHORT))
 };

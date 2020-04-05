@@ -5,6 +5,8 @@ import profile from '../screens/profile';
 import chgpass from '../screens/changepass';
 import scan from '../screens/scan';
 
+// Basically the map for the app, allows the app to navigate between activities
+
 const screens = {
     
     Default:{
