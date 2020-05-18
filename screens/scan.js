@@ -26,6 +26,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
+import {Base64} from 'js-base64';
  
 //Once the QR code is detected, navigate to the confirmation screen with the information extracted from the code
 
@@ -56,7 +57,11 @@ export default class App extends Component {
   onBarcodeScan(qrvalue) {
     //called after te successful scanning of QRCode/Barcode
     // this.setState({ qrvalue: qrvalue });
-    this.setState({ qrvalue: JSON.parse(qrvalue) });
+    try{
+    this.setState({ qrvalue: JSON.parse(Base64.decode(qrvalue)) });
+    }catch(err){
+      return;
+    }
     this.setState({ opneScanner: false });
     ;
   }
@@ -88,6 +93,7 @@ export default class App extends Component {
         .then((responseJson) => {
               if(responseJson === 'Success'){// If the change was success then navigates back to the login screen
               Alert.alert(responseJson);
+              console.log(responseJson);
               this.props.navigation.navigate('Profile');
               }else{
                 console.log(responseJson);
@@ -101,7 +107,6 @@ export default class App extends Component {
         Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
         }
     });
-    Alert.alert('Yes');
   }
 
   
