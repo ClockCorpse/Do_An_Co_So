@@ -21,7 +21,6 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { RNCamera } from 'react-native-camera';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -113,12 +112,10 @@ export default class App extends Component {
 
 
   render(){
-    //const{width}=Dimensions.get('screen');
-
+    const width=Dimensions.get('screen');
     if (!this.state.opneScanner && this.state.qrvalue['sig'] == 'DLU') {
       return (
         <View style={styles.mainContainer}>
-            {/* <Text style={styles.simpleText}>{this.state.qrvalue ? 'Scanned QR Code: '+ JSON.stringify(this.state.qrvalue) : ''}</Text> */}
             {this.state.qrvalue ?
             <View>
               <View style={styles.container}>
@@ -168,7 +165,7 @@ export default class App extends Component {
       );
     }
     return(
-
+      
       <View style={{ flex: 1 }}>
         <CameraKitCameraScreen
           showFrame={false}

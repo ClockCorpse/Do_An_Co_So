@@ -4,6 +4,8 @@ import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image,ToastA
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from '@react-native-community/async-storage'; 
 import { Base64 } from 'js-base64'
+import md5 from 'md5'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 
 
@@ -17,22 +19,23 @@ export default class App extends Component {
       mssv: '',
       password: '',
       encrypted:'',
-
+      spinner:false,
     }
   }
 
   // Encrypt the user's password before sending it to the server
   encrypt_password=()=>{
-    var temp = Base64.encode(this.state.password);
+    var temp = md5(this.state.password);
     this.setState({encrypted:temp});
   }
   
   login_Function = () => {
-    Alert.alert('Please wait');// To prevent the user from spamming the login button
     this.encrypt_password();
+    //console.log(md5(this.state.password));
     //Check Internet connection before attempting to fetch api
     NetInfo.fetch().then(state=>{
       if(state.isConnected === true){
+        this.setState({spinner:true});
         // If theres a connection then fetch the api
         fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
       method: 'POST',
@@ -43,23 +46,28 @@ export default class App extends Component {
       },
       body: JSON.stringify({
  
-        mssv: this.state.mssv,
+        email: this.state.mssv,
         user_password: this.state.encrypted
  
       })
  
     }).then((response) => response.json()) //get Json response
       .then((responseJson) => {
-            //Alert.alert(responseJson); for debugging purpose
+            //Alert.alert(responseJson); //for debugging purpose
             if(responseJson.result === 'Matched'){//If it matches then navigate to profile activity
-                var username = responseJson.user_name;
+                var ten = responseJson.ten;
+                var tenLot = responseJson.tenLot;
                 var mssv = responseJson.mssv;
                 var email = responseJson.email;
                 var lop = responseJson.lop;
-                AsyncStorage.setItem('name',username);
+                var role = responseJson.role;
+                AsyncStorage.setItem('ten',ten);
+                AsyncStorage.setItem('tenLot',tenLot);
                 AsyncStorage.setItem('mssv',mssv);
                 AsyncStorage.setItem('email',email);
                 AsyncStorage.setItem('lop',lop);
+                AsyncStorage.setItem('role',role);
+                this.setState({spinner:false});
                 this.props.navigation.push('Profile');
             }else{
                 Alert.alert(responseJson);//if not then alert the user
@@ -81,16 +89,20 @@ export default class App extends Component {
     return (
  
       <View style={styles.container}>
+        <Spinner
+          visible={this.state.spinner}
+          textContent={'Đang tải...'}
+          textStyle={styles.spinnerTextStyle}
+        />
         <View style={styles.box}>
         <Image source={require('../logo_DLU.png')} />
          <Text>---------- -*- ----------</Text>
 
         <TextInput
-          placeholder="MSSV"
+          placeholder="Email"
           onChangeText={data => this.setState({ mssv: data })}
           underlineColorAndroid='transparent'
           style={styles.input}
-          keyboardType='numeric'
         />
  
         <TextInput
@@ -118,6 +130,9 @@ export default class App extends Component {
 
 
 const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
   container:{
     flex:1,
     backgroundColor: '#609810',

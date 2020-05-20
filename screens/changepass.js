@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from "@react-native-community/netinfo";
-import { Base64 } from 'js-base64'
+import { Base64 } from 'js-base64';
+import md5 from 'md5';
 
 
 export default class App extends Component{
@@ -24,6 +25,7 @@ export default class App extends Component{
       newPassword:'',
       newPasswordConfirm:'',
       mssv:'',
+      mail:'',
       encrypted:'',
       newEncrypted:'',
     }
@@ -32,18 +34,18 @@ export default class App extends Component{
     this._loadInitialState().done();
   }
   _loadInitialState = async()=>{
-    var value = await AsyncStorage.getItem('mssv');
-    this.setState({mssv:value});
+    var value = await AsyncStorage.getItem('email');
+    this.setState({email:value});
   }
 
   // Encrypt the user's password and new password before sending it to the server
   encrypt_password=()=>{
-    var temp = Base64.encode(this.state.oldPassword);
+    var temp = md5(this.state.oldPassword);
     this.setState({encrypted:temp});
   }
 
   encrypt_newPassword=()=>{
-    var temp = Base64.encode(this.state.newPassword);
+    var temp = md5(this.state.newPassword);
     this.setState({newEncrypted:temp});
   }
 
@@ -75,7 +77,7 @@ export default class App extends Component{
       },
       body: JSON.stringify({
         
-        mssv: this.state.mssv,
+        email: this.state.email,
         user_password: this.state.encrypted,
         new_user_password: this.state.newEncrypted,
         
