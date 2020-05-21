@@ -4,7 +4,7 @@ import login from '../screens/login';
 import profile from '../screens/profile';
 import chgpass from '../screens/changepass';
 import scan from '../screens/scan';
-
+import eventCreate from '../screens/createEvent'
 // Basically the map for the app, allows the app to navigate between activities
 
 const screens = {
@@ -29,6 +29,12 @@ const screens = {
     },
     Scan:{
         screen: scan,
+    },
+    EventCreate:{
+        screen: eventCreate,
+        navigationOptions:{
+        headerShown:false,
+        }
     },
     
 }

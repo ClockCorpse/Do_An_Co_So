@@ -58,8 +58,8 @@ export default class App extends Component{
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={styles.btnScan}
-                        onPress={()=>this.props.navigation.navigate('Scan')}>
-                            <Text style={styles.btnExitText}>Quét</Text>
+                        onPress={()=>this.props.navigation.navigate('EventCreate')}>
+                            <Text style={styles.btnExitText}>Tạo sự kiện</Text>
                         </TouchableOpacity>
                 </View>
             )

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { StyleSheet, TextInput, View, Alert, TouchableOpacity, Text,Image,ToastAndroid, } from 'react-native';
 import NetInfo from "@react-native-community/netinfo";
 import AsyncStorage from '@react-native-community/async-storage'; 
-import { Base64 } from 'js-base64'
 import md5 from 'md5'
 import Spinner from 'react-native-loading-spinner-overlay'
 
