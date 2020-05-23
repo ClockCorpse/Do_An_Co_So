@@ -12,12 +12,59 @@ export default class App extends Component {
         super()
         this.state = {
             isVisible: false,
-            choseDate: 'DD/MM/YYYY hh:mm'
+            choseDate: 'DD/MM/YYYY hh:mm',
+            eventName: '',
+            note: '',
+            role: '',
+            ID: '',
         }
+    }
+    componentDidMount() {
+        this._loadInitialState().done();
+    }
+    _loadInitialState = async () => {
+        var value = await AsyncStorage.getItem('role');
+        this.setState({ role: value });
+        var value = await AsyncStorage.getItem('ID');
+        this.setState({ ID: value });
     }
 
     eventCreate = () => {
-        Alert.alert('Ok');
+        NetInfo.fetch().then(state => {
+            if (state.isConnected === true) {
+                // If theres a connection then fetch the api
+                fetch('https://rightward-horizons.000webhostapp.com/createEvent.php', {
+                    method: 'POST',
+                    //Create Json
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+
+                        eventName: this.state.eventName,
+                        note: this.state.note,
+                        time: this.state.choseDate,
+                        role: this.state.role,
+                        ID: this.state.ID,
+                    })
+
+                }).then((response) => response.json()) // Get Json response
+                    .then((responseJson) => {
+                        if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
+                            Alert.alert(responseJson);
+                            console.log(responseJson);
+                        } else {
+                            console.log(responseJson);
+                            Alert.alert(responseJson);//if not then alert the user
+                        }
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+            } else {
+                Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+            }
+        });
     }
 
     handlePicker = (datetime) => {
@@ -49,14 +96,14 @@ export default class App extends Component {
                             is24Hour={true}
                         />
                         <Text style={styles.Header}>Tên sự kiện</Text>
-                        <TextInput style={styles.TextInput} />
-                        <Text style={styles.Header}>Ghi chú</Text>
-                        <TextInput style={styles.TextInput} />
-                        <Text style={styles.Header}>Thời gian cho phép(phút)</Text>
                         <TextInput
                             style={styles.TextInput}
-                            keyboardType={"numeric"} />
-                        <Text style={styles.Header}>Thời gian</Text>
+                            onChangeText={data => this.setState({ eventName: data })} />
+                        <Text style={styles.Header}>Ghi chú</Text>
+                        <TextInput
+                            style={styles.TextInput}
+                            onChangeText={data => this.setState({ note: data })} />
+                        <Text style={styles.Header}>Hạn điểm danh</Text>
                         <View style={styles.pickDate}>
                             <Text style={styles.Text}>{this.state.choseDate}</Text>
                             <TouchableOpacity
