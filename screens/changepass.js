@@ -14,7 +14,9 @@ import NetInfo from "@react-native-community/netinfo";
 import { Base64 } from 'js-base64';
 import md5 from 'md5';
 import { ScrollView } from 'react-native-gesture-handler';
+import Spinner from 'react-native-loading-spinner-overlay'
 
+console.disableYellowBox = true;
 
 export default class App extends Component {
 
@@ -29,6 +31,7 @@ export default class App extends Component {
       mail: '',
       encrypted: '',
       newEncrypted: '',
+      spinner: false,
     }
   }
   componentDidMount() {
@@ -52,7 +55,7 @@ export default class App extends Component {
 
   // This speaks for itself(Change password function)
   changePass_Function = () => {
-
+    this.setState({spinner:true});
     // Calls the encrypting functions
     this.encrypt_password();
     this.encrypt_newPassword();
@@ -69,7 +72,7 @@ export default class App extends Component {
       if (state.isConnected === true) {
         // If theres a connection then fetch the api
         if (valid === 1) {
-          fetch('https://rightward-horizons.000webhostapp.com/change_pass.php', {
+          fetch('http://dacs.xyz/change_pass.php', {
             method: 'POST',
             //Create Json
             headers: {
@@ -87,9 +90,11 @@ export default class App extends Component {
           }).then((response) => response.json()) // Get Json response
             .then((responseJson) => {
               if (responseJson === 'Changecomplete') {// If the change was success then navigates back to the login screen
+                this.setState({spinner:false});
                 Alert.alert(responseJson);
                 this.props.navigation.navigate('Default');
               } else {
+                this.setState({spinner:false});
                 Alert.alert(responseJson);//if not then alert the user
               }
 
@@ -97,9 +102,11 @@ export default class App extends Component {
               console.error(error);
             });
         } else {
+          this.setState({spinner:false});
           Alert.alert('Mật khẩu quá ngắn hoặc xác nhận mật khẩu không chính xác');
         }
       } else {
+        this.setState({spinner:false});
         Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
       }
     });
@@ -110,6 +117,11 @@ export default class App extends Component {
     return (
       <ScrollView>
         <View style={styles.body}>
+        <Spinner
+          visible={this.state.spinner}
+          textContent={'Đang tải...'}
+          textStyle={styles.spinnerTextStyle}
+        />
           <View style={styles.mainContainer}>
             <View style={styles.container}>
               <Text style={styles.Text}>Nhập mật khẩu cũ: </Text>
@@ -159,6 +171,9 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
   body: {
     padding: 25,
     backgroundColor: "#609810"

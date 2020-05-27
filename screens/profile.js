@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ScrollView } from 'react-native-gesture-handler';
 
+console.disableYellowBox = true;
 
 export default class App extends Component {
     state = {

@@ -7,6 +7,8 @@ import moment from 'moment'
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { ScrollView } from 'react-native-gesture-handler';
 
+console.disableYellowBox = true;
+
 export default class App extends Component {
     constructor() {
         super()
@@ -17,6 +19,8 @@ export default class App extends Component {
             note: '',
             role: '',
             ID: '',
+            mail: '',
+            spinner: false,
         }
     }
     componentDidMount() {
@@ -27,13 +31,17 @@ export default class App extends Component {
         this.setState({ role: value });
         var value = await AsyncStorage.getItem('ID');
         this.setState({ ID: value });
+        var value = await AsyncStorage.getItem('email');
+        this.setState({ mail: value });
     }
 
     eventCreate = () => {
+        this.setState({ spinner: true });
         NetInfo.fetch().then(state => {
             if (state.isConnected === true) {
                 // If theres a connection then fetch the api
-                fetch('https://rightward-horizons.000webhostapp.com/createEvent.php', {
+                // fetch('https://rightward-horizons.000webhostapp.com/createEvent.php', {
+                fetch('http://dacs.xyz/createEvent.php', {
                     method: 'POST',
                     //Create Json
                     headers: {
@@ -47,14 +55,17 @@ export default class App extends Component {
                         time: this.state.choseDate,
                         role: this.state.role,
                         ID: this.state.ID,
+                        mail: this.state.mail,
                     })
 
                 }).then((response) => response.json()) // Get Json response
                     .then((responseJson) => {
                         if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
+                            this.setState({ spinner: false });
                             Alert.alert(responseJson);
                             console.log(responseJson);
                         } else {
+                            this.setState({ spinner: false });
                             console.log(responseJson);
                             Alert.alert(responseJson);//if not then alert the user
                         }
@@ -62,6 +73,7 @@ export default class App extends Component {
                         console.error(error);
                     });
             } else {
+                this.setState({ spinner: false });
                 Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
             }
         });
@@ -87,6 +99,11 @@ export default class App extends Component {
         return (
             <ScrollView>
                 <View style={styles.body}>
+                    <Spinner
+                        visible={this.state.spinner}
+                        textContent={'Đang tải...'}
+                        textStyle={styles.spinnerTextStyle}
+                    />
                     <View style={styles.mainContainer}>
                         <DateTimePicker
                             isVisible={this.state.isVisible}
@@ -138,6 +155,9 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+    spinnerTextStyle: {
+        color: '#FFF'
+    },
     btn: {
         backgroundColor: "#24a0ed",
         height: 40,

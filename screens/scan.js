@@ -23,9 +23,12 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
+import BarcodeMask from 'react-native-barcode-mask';
 
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import { Base64 } from 'js-base64';
+
+console.disableYellowBox = true;
 
 //Once the QR code is detected, navigate to the confirmation screen with the information extracted from the code
 
@@ -85,7 +88,7 @@ export default class App extends Component {
     NetInfo.fetch().then(state => {
       if (state.isConnected === true) {
         // If theres a connection then fetch the api
-        fetch('https://rightward-horizons.000webhostapp.com/attendance.php', {
+        fetch('http://dacs.xyz/attendance.php', {
           method: 'POST',
           //Create Json
           headers: {
@@ -191,6 +194,7 @@ export default class App extends Component {
     return (
 
       <View style={{ flex: 1 }}>
+        
         <CameraKitCameraScreen
           showFrame={false}
           //Show/hide scan frame
@@ -206,6 +210,9 @@ export default class App extends Component {
             this.onBarcodeScan(event.nativeEvent.codeStringValue)
           }
         />
+        <BarcodeMask width={250}
+         height={250}
+         transparency={0.3} />
       </View>
 
       // <View style={styles.container}>

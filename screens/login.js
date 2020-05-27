@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import md5 from 'md5'
 import Spinner from 'react-native-loading-spinner-overlay'
 
-
+console.disableYellowBox = true;
 
 export default class App extends Component {
 
@@ -36,7 +36,7 @@ export default class App extends Component {
       if (state.isConnected === true) {
         this.setState({ spinner: true });
         // If theres a connection then fetch the api
-        fetch('https://rightward-horizons.000webhostapp.com/login_api.php', {
+        fetch('http://dacs.xyz/login_api.php', {
           method: 'POST',
           //Create JSON
           headers: {
