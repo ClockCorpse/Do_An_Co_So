@@ -29,63 +29,65 @@ export default class App extends Component {
   }
 
   login_Function = () => {
-    this.encrypt_password();
-    //console.log(md5(this.state.password));
-    //Check Internet connection before attempting to fetch api
-    NetInfo.fetch().then(state => {
-      if (state.isConnected === true) {
-        this.setState({ spinner: true });
-        // If theres a connection then fetch the api
-        fetch('http://dacs.xyz/login_api.php', {
-          method: 'POST',
-          //Create JSON
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+    var format = /[']/;
+    if (!format.test(this.state.mssv)) {
+      this.encrypt_password();
+      //console.log(md5(this.state.password));
+      //Check Internet connection before attempting to fetch api
+      NetInfo.fetch().then(state => {
+        if (state.isConnected === true) {
+          this.setState({ spinner: true });
+          // If theres a connection then fetch the api
+          fetch('http://dacs.xyz/login_api.php', {
+            method: 'POST',
+            //Create JSON
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
 
-            email: this.state.mssv,
-            user_password: this.state.encrypted
+              email: this.state.mssv,
+              user_password: this.state.encrypted
 
-          })
+            })
 
-        }).then((response) => response.json()) //get Json response
-          .then((responseJson) => {
-            //Alert.alert(responseJson); //for debugging purpose
-            if (responseJson.result === 'Matched') {//If it matches then navigate to profile activity
-              var ID = responseJson.ID;
-              var ten = responseJson.ten;
-              var tenLot = responseJson.tenLot;
-              var mssv = responseJson.mssv;
-              var email = responseJson.email;
-              var lop = responseJson.lop;
-              var role = responseJson.role;
-              AsyncStorage.setItem('ID', ID);
-              AsyncStorage.setItem('ten', ten);
-              AsyncStorage.setItem('tenLot', tenLot);
-              AsyncStorage.setItem('mssv', mssv);
-              AsyncStorage.setItem('email', email);
-              AsyncStorage.setItem('lop', lop);
-              AsyncStorage.setItem('role', role);
-              this.setState({ spinner: false });
-              this.props.navigation.push('Profile');
-            } else {
-              this.setState({ spinner: false });
-              console.log(responseJson);
-              Alert.alert(responseJson);//if not then alert the user
-            }
+          }).then((response) => response.json()) //get Json response
+            .then((responseJson) => {
+              //Alert.alert(responseJson); //for debugging purpose
+              if (responseJson.result === 'Matched') {//If it matches then navigate to profile activity
+                var ID = responseJson.ID;
+                var ten = responseJson.ten;
+                var tenLot = responseJson.tenLot;
+                var mssv = responseJson.mssv;
+                var email = responseJson.email;
+                var lop = responseJson.lop;
+                var role = responseJson.role;
+                AsyncStorage.setItem('ID', ID);
+                AsyncStorage.setItem('ten', ten);
+                AsyncStorage.setItem('tenLot', tenLot);
+                AsyncStorage.setItem('mssv', mssv);
+                AsyncStorage.setItem('email', email);
+                AsyncStorage.setItem('lop', lop);
+                AsyncStorage.setItem('role', role);
+                this.setState({ spinner: false });
+                this.props.navigation.push('Profile');
+              } else {
+                this.setState({ spinner: false });
+                console.log(responseJson);
+                Alert.alert(responseJson);//if not then alert the user
+              }
 
-          }).catch((error) => {
-            console.error(error);
-          });
-      } else {
-        Alert.alert('No connection to the internet');//if there's no connection to the Internet then alert the user
-      }
-    });
-
-
-
+            }).catch((error) => {
+              console.error(error);
+            });
+        } else {
+          Alert.alert('No connection to the internet');//if there's no connection to the Internet then alert the user
+        }
+      });
+    }else{
+      Alert.alert('Địa chỉ email không hợp lệ');
+    }
   }
   //front end stuffs from here
   render() {

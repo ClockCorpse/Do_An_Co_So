@@ -36,47 +36,57 @@ export default class App extends Component {
     }
 
     eventCreate = () => {
-        this.setState({ spinner: true });
-        NetInfo.fetch().then(state => {
-            if (state.isConnected === true) {
-                // If theres a connection then fetch the api
-                // fetch('https://rightward-horizons.000webhostapp.com/createEvent.php', {
-                fetch('http://dacs.xyz/createEvent.php', {
-                    method: 'POST',
-                    //Create Json
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
+        if (this.state.eventName != '') {
+            if (this.state.choseDate != 'DD/MM/YYYY hh:mm') {
+                this.setState({ spinner: true });
+                NetInfo.fetch().then(state => {
+                    if (state.isConnected === true) {
+                        // If theres a connection then fetch the api
+                        // fetch('https://rightward-horizons.000webhostapp.com/createEvent.php', {
+                        fetch('http://dacs.xyz/createEvent.php', {
+                            method: 'POST',
+                            //Create Json
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
 
-                        eventName: this.state.eventName,
-                        note: this.state.note,
-                        time: this.state.choseDate,
-                        role: this.state.role,
-                        ID: this.state.ID,
-                        mail: this.state.mail,
-                    })
+                                eventName: this.state.eventName,
+                                note: this.state.note,
+                                time: this.state.choseDate,
+                                role: this.state.role,
+                                ID: this.state.ID,
+                                mail: this.state.mail,
+                            })
 
-                }).then((response) => response.json()) // Get Json response
-                    .then((responseJson) => {
-                        if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
-                            this.setState({ spinner: false });
-                            Alert.alert(responseJson);
-                            console.log(responseJson);
-                        } else {
-                            this.setState({ spinner: false });
-                            console.log(responseJson);
-                            Alert.alert(responseJson);//if not then alert the user
-                        }
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-            } else {
-                this.setState({ spinner: false });
-                Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                        }).then((response) => response.json()) // Get Json response
+                            .then((responseJson) => {
+                                if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
+                                    this.setState({ spinner: false });
+                                    Alert.alert('Thành công');
+                                    console.log(responseJson);
+                                    this.props.navigation.navigate('Profile');
+                                } else {
+                                    this.setState({ spinner: false });
+                                    console.log(responseJson);
+                                    Alert.alert('Thất bại');//if not then alert the user
+                                }
+                            }).catch((error) => {
+                                console.error(error);
+                            });
+                    } else {
+                        this.setState({ spinner: false });
+                        Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                    }
+                });
+            }else{
+                Alert.alert('Xin nhập hạn điểm danh');
             }
-        });
+        }
+        else {
+            Alert.alert('Tên sự kiện không được phép trống.');
+        }
     }
 
     handlePicker = (datetime) => {
