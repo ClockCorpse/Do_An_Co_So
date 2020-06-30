@@ -85,7 +85,7 @@ export default class App extends Component {
           Alert.alert('No connection to the internet');//if there's no connection to the Internet then alert the user
         }
       });
-    }else{
+    } else {
       Alert.alert('Địa chỉ email không hợp lệ');
     }
   }
@@ -102,21 +102,29 @@ export default class App extends Component {
         <View style={styles.box}>
           <Image source={require('../logo_DLU.png')} />
           <Text>---------- -*- ----------</Text>
+          <View style={styles.input}>
+            <Image source={require('../email_icon.png')}
+              style={styles.ImageStyle} />
+            <TextInput
+              placeholder="Email"
+              onChangeText={data => this.setState({ mssv: data })}
+              underlineColorAndroid='transparent'
+              //style={styles.input}
+              style={{ backgroundColor: 'transparent', width:195 }}
+            />
+          </View>
 
-          <TextInput
-            placeholder="Email"
-            onChangeText={data => this.setState({ mssv: data })}
-            underlineColorAndroid='transparent'
-            style={styles.input}
-          />
-
-          <TextInput
-            placeholder="Mật khẩu"
-            onChangeText={data => this.setState({ password: data })}
-            underlineColorAndroid='transparent'
-            style={styles.input}
-            secureTextEntry={true}
-          />
+          <View style={styles.input}>
+            <Image source={require('../password_icon.png')}
+              style={styles.ImageStyle} />
+            <TextInput
+              placeholder="Mật khẩu"
+              onChangeText={data => this.setState({ password: data })}
+              underlineColorAndroid='transparent'
+              style={{ backgroundColor: 'transparent', width:195 }}
+              secureTextEntry={true}
+            />
+          </View>
 
           <TouchableOpacity style={styles.buttonContainer} onPress={this.login_Function} >
 
@@ -156,8 +164,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: '#777',
     width: 250,
-    padding: 11,
-    margin: 10
+    padding: 5,
+    margin: 10,
+    flexDirection: 'row'
   },
   buttonContainer: {
     width: 250,
@@ -175,5 +184,13 @@ const styles = StyleSheet.create({
     color: "#000",
     textAlign: 'center',
     marginBottom: 15
-  }
+  },
+  ImageStyle: {
+    padding: 15,
+    margin: 5,
+    height: 30,
+    width: 30,
+    alignItems: 'center',
+    backgroundColor:'transparent'
+  },
 });
