@@ -1,0 +1,444 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200630.213234.12576.0.001.json",
+    "dumpEventTime": "2020-06-30T21:32:34Z",
+    "dumpEventTimeStamp": "1593527554710",
+    "processId": 12576,
+    "cwd": "E:\\react_native\\Do_An_Co_So",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "E:\\react_native\\Do_An_Co_So\\node_modules\\jest-worker\\build\\workers\\processChild.js"
+    ],
+    "nodejsVersion": "v13.7.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "13.7.0",
+      "v8": "7.9.317.25-node.28",
+      "uv": "1.34.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "79",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.1",
+      "openssl": "1.1.1d",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v13.7.0/node-v13.7.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v13.7.0/node-v13.7.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v13.7.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro N",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz",
+        "speed": 3193,
+        "user": 46520078,
+        "nice": 0,
+        "sys": 22814234,
+        "idle": 259225765,
+        "irq": 3713156
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz",
+        "speed": 3193,
+        "user": 59935875,
+        "nice": 0,
+        "sys": 18791609,
+        "idle": 249832578,
+        "irq": 553375
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz",
+        "speed": 3193,
+        "user": 57784906,
+        "nice": 0,
+        "sys": 18516281,
+        "idle": 252258859,
+        "irq": 351640
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz",
+        "speed": 3193,
+        "user": 58853906,
+        "nice": 0,
+        "sys": 20140625,
+        "idle": 249565562,
+        "irq": 274890
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Ethernet 3",
+        "internal": false,
+        "mac": "0a:00:27:00:00:13",
+        "address": "fe80::2516:540e:daa0:7f07",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 19
+      },
+      {
+        "name": "Ethernet 3",
+        "internal": false,
+        "mac": "0a:00:27:00:00:13",
+        "address": "192.168.56.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "fe80::a83d:f46:1d80:fb2c",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 15
+      },
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "192.168.221.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "fe80::e4f1:fb5c:44c2:3528",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 17
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "192.168.52.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "d4:6e:0e:1f:f2:08",
+        "address": "192.168.1.254",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "ITK-20170708MYA"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7458a1c09",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7458a5f7c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7458a4f38",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff74599ebcb",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7461c7fee",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7461af741",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff7460767ac",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff746052133",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff74605058b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff74607bfed",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff74607dd9a",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff746073cf3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff746072484",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff746094554",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff745dee6cf",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff74661154d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x000001a533885c15",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 139857920,
+    "totalCommittedMemory": 139857920,
+    "usedMemory": 73491928,
+    "availableMemory": 2095520072,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 33040,
+        "used": 33040,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16758784,
+        "used": 344856,
+        "available": 16413928
+      },
+      "old_space": {
+        "memorySize": 89006080,
+        "committedMemory": 89006080,
+        "capacity": 59848464,
+        "used": 59738448,
+        "available": 110016
+      },
+      "code_space": {
+        "memorySize": 3575808,
+        "committedMemory": 3575808,
+        "capacity": 1667488,
+        "used": 1581824,
+        "available": 85664
+      },
+      "map_space": {
+        "memorySize": 2625536,
+        "committedMemory": 2625536,
+        "capacity": 1047680,
+        "used": 1047680,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 10784768,
+        "committedMemory": 10784768,
+        "capacity": 10743296,
+        "used": 10743296,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16758784,
+        "used": 0,
+        "available": 16758784
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 27.593,
+    "kernelCpuSeconds": 1.187,
+    "cpuConsumptionPercent": 87.2121,
+    "maxRss": 230825984,
+    "pageFaults": {
+      "IORequired": 271657,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 1743,
+      "writes": 190
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "ANDROID_HOME": "C:\\Users\\HELLO\\AppData\\Local\\Android\\Sdk",
+    "ANDROID_SDK_HOME": "E:\\Lap_trinh_android",
+    "APPDATA": "C:\\Users\\HELLO\\AppData\\Roaming",
+    "APP_BASE_NAME": "gradlew",
+    "APP_HOME": "E:\\react_native\\Do_An_Co_So\\android\\",
+    "AV_APPDATA": "C:\\Users\\HELLO\\AppData\\Roaming",
+    "BABEL_ENV": "production",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "132313130931051691",
+    "ChocolateyToolsLocation": "C:\\tools",
+    "CLASSPATH": "E:\\react_native\\Do_An_Co_So\\android\\\\gradle\\wrapper\\gradle-wrapper.jar",
+    "CMD_LINE_ARGS": "\"app:installRelease\" \"-PreactNativeDevServerPort=8081\"",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "ITK-20170708MYA",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "C_EM64T_REDIST11": "C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\",
+    "DEFAULT_JVM_OPTS": "\"-Xmx64m\" \"-Xms64m\"",
+    "DIRNAME": "E:\\react_native\\Do_An_Co_So\\android\\",
+    "dp0": "E:\\react_native\\Do_An_Co_So\\node_modules\\.bin\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "FORCE_COLOR": "1",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\HELLO",
+    "JAVA_EXE": "C:\\Program Files\\Java\\jdk1.8.0_211/bin/java.exe",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_211",
+    "LOCALAPPDATA": "C:\\Users\\HELLO\\AppData\\Local",
+    "LOGONSERVER": "\\\\ITK-20170708MYA",
+    "MOZ_PLUGIN_PATH": "C:\\Program Files (x86)\\Foxit Software\\Foxit Reader\\plugins\\",
+    "MYSQLCONNECTOR_ASSEMBLIESPATH": "C:\\Program Files (x86)\\MySQL\\Connector NET 8.0\\Assemblies\\v4.5.2",
+    "NDI_RUNTIME_DIR_V2": "C:\\Program Files\\NewTek\\NewTek NDI 3.8 Runtime\\v3",
+    "NDI_RUNTIME_DIR_V3": "C:\\Program Files\\NewTek\\NewTek NDI 3.8 Runtime\\v3",
+    "NODE_ENV": "production",
+    "NODE_EXE": "C:\\Program Files\\nodejs\\\\node.exe",
+    "NPM_CLI_JS": "C:\\Program Files\\nodejs\\\\node_modules\\npm\\bin\\npm-cli.js",
+    "NPM_PREFIX_NPX_CLI_JS": "C:\\Users\\HELLO\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npx-cli.js",
+    "NPX_CLI_JS": "C:\\Program Files\\nodejs\\\\node_modules\\npm\\bin\\npx-cli.js",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\HELLO\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\HELLO\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "E:\\react_native\\Do_An_Co_So\\node_modules\\.bin;E:\\react_native\\Do_An_Co_So\\android\\node_modules\\.bin;E:\\react_native\\Do_An_Co_So\\node_modules\\.bin;E:\\react_native\\node_modules\\.bin;E:\\node_modules\\.bin;C:\\Program Files\\nodejs;E:\\react_native\\Do_An_Co_So\\node_modules\\.bin;C:\\Program Files (x86)\\Common Files\\Intel\\Shared Files\\cpp\\bin\\Intel64;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Users\\HELLO\\.dnx\\bin;C:\\Program Files\\Microsoft DNX\\Dnvm\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\Microsoft SQL Server\\Client SDK\\ODBC\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DTS\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\Binn\\ManagementStudio\\;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Program Files\\dotnet\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\150\\DTS\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\DTS\\Binn\\;C:\\Program Files\\Git\\cmd;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\nodejs\\;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;c:\\Users\\HELLO\\AppData\\Local\\Android\\Sdk\\platform-tools;E:\\PuTTY\\;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\ProgramData\\DockerDesktop\\version-bin;C:\\Users\\HELLO\\AppData\\Local\\Programs\\Python\\Python36;C:\\Users\\HELLO\\AppData\\Local\\Programs\\Python\\Python36\\Scripts;C:\\Users\\HELLO\\AppData\\Local\\Programs\\Python\\Python36\\Scripts\\;C:\\Users\\HELLO\\AppData\\Local\\Programs\\Python\\Python36\\;C:\\Program Files\\Java\\jdk-10.0.1\\bin;C:\\Users\\HELLO\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\HELLO\\AppData\\Roaming\\npm;E:\\Microsoft VS Code\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "3c03",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\Tools\\PowerShell\\Modules\\",
+    "PT6HOME": "E:\\Cisco Packet Tracer 6.2iv",
+    "PT7HOME": "E:\\Cisco Packet Tracer 7.3.0",
+    "PUBLIC": "C:\\Users\\Public",
+    "QT_DEVICE_PIXEL_RATIO": "auto",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\HELLO\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\HELLO\\AppData\\Local\\Temp",
+    "USERDOMAIN": "ITK-20170708MYA",
+    "USERDOMAIN_ROAMINGPROFILE": "ITK-20170708MYA",
+    "USERNAME": "HELLO",
+    "USERPROFILE": "C:\\Users\\HELLO",
+    "VBOX_MSI_INSTALL_PATH": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "VS140COMNTOOLS": "E:\\Microsoft Visual Studio 14.0\\Common7\\Tools\\",
+    "windir": "C:\\WINDOWS",
+    "_JAVA_OPTIONS": "-Xmx512M",
+    "_prog": "node",
+    "_SKIP": "2"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\System32\\UMPDC.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\Program Files\\Bonjour\\mdnsNSP.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL"
+  ]
+}

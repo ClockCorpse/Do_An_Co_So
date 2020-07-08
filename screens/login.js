@@ -75,18 +75,18 @@ export default class App extends Component {
               } else {
                 this.setState({ spinner: false });
                 console.log(responseJson);
-                Alert.alert(responseJson);//if not then alert the user
+                Alert.alert('Thông báo','Email hoặc mật khẩu không chính xác');//if not then alert the user
               }
 
             }).catch((error) => {
               console.error(error);
             });
         } else {
-          Alert.alert('No connection to the internet');//if there's no connection to the Internet then alert the user
+          Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
         }
       });
     } else {
-      Alert.alert('Địa chỉ email không hợp lệ');
+      Alert.alert('Thông báo','Địa chỉ email không hợp lệ');
     }
   }
   //front end stuffs from here
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     height: 500,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius:10,
   },
   input: {
     borderWidth: 1,
@@ -188,6 +189,7 @@ const styles = StyleSheet.create({
   ImageStyle: {
     padding: 15,
     margin: 5,
+    marginTop:8,
     height: 30,
     width: 30,
     alignItems: 'center',

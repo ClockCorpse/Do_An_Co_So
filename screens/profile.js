@@ -71,7 +71,7 @@ export default class App extends Component {
                             this.setState({ spinner: false });
                             this.setState({ search: false });
                             this.forceUpdate();
-                            Alert.alert('Người dùng không tồn tại');//if not then alert the user
+                            Alert.alert('Thông báo','Người dùng không tồn tại');//if not then alert the user
                         }
 
                     }).catch((error) => {
@@ -79,7 +79,7 @@ export default class App extends Component {
                     });
             } else {
                 this.setState({ spinner: false });
-                Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
             }
         });
     }
@@ -107,10 +107,10 @@ export default class App extends Component {
                     .then((responseJson) => {
                         if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                             this.setState({ spinner: false });
-                            Alert.alert('Thành công!')
+                            Alert.alert('Thông báo','Thành công!')
                         } else {
                             this.setState({ spinner: false });
-                            Alert.alert('Cấp quyền thất bại!');//if not then alert the user
+                            Alert.alert('Thông báo','Cấp quyền thất bại!');//if not then alert the user
                         }
 
                     }).catch((error) => {
@@ -118,7 +118,7 @@ export default class App extends Component {
                     });
             } else {
                 this.setState({ spinner: false });
-                Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
             }
         });
     }
@@ -144,10 +144,10 @@ export default class App extends Component {
                     .then((responseJson) => {
                         if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                             this.setState({ spinner: false });
-                            Alert.alert('Thành công!')
+                            Alert.alert('Thông báo','Thành công!')
                         } else {
                             this.setState({ spinner: false });
-                            Alert.alert('Người dùng không tồn tại');//if not then alert the user
+                            Alert.alert('Thông báo','Người dùng không tồn tại');//if not then alert the user
                         }
 
                     }).catch((error) => {
@@ -155,91 +155,12 @@ export default class App extends Component {
                     });
             } else {
                 this.setState({ spinner: false });
-                Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
             }
         });
     }
 
     render() {
-        if (this.state.role === '1' && this.state.search === true) {
-            return (
-                <ScrollView style={styles.scrollContainer}>
-                    <Spinner
-                        visible={this.state.spinner}
-                        textContent={'Đang tải...'}
-                        textStyle={styles.spinnerTextStyle}
-                    />
-                    <View style={styles.mainContainerrole1}>
-                        <View style={styles.container}>
-                            <Text style={styles.infoHeader}>Họ Tên Lót</Text>
-                            <Text style={styles.info}>{this.state.tenLot}</Text>
-                        </View>
-                        <View style={styles.container}>
-                            <Text style={styles.infoHeader}>Tên</Text>
-                            <Text style={styles.info}>{this.state.ten}</Text>
-                        </View>
-                        <View style={styles.container}>
-                            <Text style={styles.infoHeader}>Email</Text>
-                            <Text style={styles.info}>{this.state.email}</Text>
-                        </View>
-                        <View style={styles.footer}>
-                            <TouchableOpacity
-                                style={styles.btnPassword}
-                                onPress={() => this.props.navigation.navigate('ChangePass')}>
-                                <Text style={styles.btnPasswordText}>Đổi mật khẩu</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnExit}
-                                onPress={() => this.props.navigation.navigate('Default')}>
-                                <Text style={styles.btnExitText}>Đăng xuất</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity style={styles.btnScan}
-                            onPress={() => this.props.navigation.navigate('EventCreate')}>
-                            <Text style={styles.btnExitText}>Tạo sự kiện</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={styles.infoHeader}> Cấp quyền sinh viên</Text>
-                    <View style={{
-                        flexDirection: 'row', width: window.width, margin: 20, padding: 4, alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: '#fff'
-                    }}>
-                        <View style={{ flex: 4, paddingLeft: 15 }}>
-                            <TextInput
-                                onChangeText={data => this.setState({ search_ms: data })}
-                                style={{ backgroundColor: 'transparent' }}
-                                placeholder='MSSV'
-                                keyboardType="numeric"
-                            />
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <TouchableOpacity
-                                style={{ backgroundColor: 'transparent', paddingLeft: 30 }}
-                                onPress={this.search_function}
-                            >
-                                <Image source={require('../search_icon.png')} />
-                            </TouchableOpacity>
-                        </View>
-                    </View >
-                    <View style={styles.roleAssign}>
-                        <Text style={styles.txtAssignInfo}>{this.state.assign_info}</Text>
-                        <TouchableOpacity
-                            style={styles.btnAssign}
-                            onPress={this.assign_role_function}>
-                            <Text style={styles.txtAssign}>
-                                Cấp quyền
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.btnUnassign}
-                            onPress={this.unassign_role_function}>
-                            <Text style={styles.txtAssign}>
-                                Thu quyền
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <Text>Hệ thống phân quyền sẽ được làm mới vào 00:00 hằng ngày</Text>
-                </ScrollView >
-            )
-        }
         if (this.state.role === '1') {
             return (
                 <ScrollView style={styles.scrollContainer}>
@@ -273,32 +194,10 @@ export default class App extends Component {
                             </TouchableOpacity>
                         </View>
                         <TouchableOpacity style={styles.btnScan}
-                            onPress={() => this.props.navigation.navigate('EventCreate')}>
-                            <Text style={styles.btnExitText}>Tạo sự kiện</Text>
+                            onPress={() => this.props.navigation.navigate('Dashboard')}>
+                            <Text style={styles.btnExitText}>Quản lý</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.infoHeader}> Cấp quyền sinh viên</Text>
-                    <View style={{
-                        flexDirection: 'row', width: window.width, margin: 20, padding: 4, alignItems: 'center', justifyContent: 'center', borderRadius: 10, backgroundColor: '#fff',
-                    }}>
-                        < View style={{ flex: 4, paddingLeft: 15 }}>
-                            <TextInput
-                                onChangeText={data => this.setState({ search_ms: data })}
-                                style={{ backgroundColor: 'transparent' }}
-                                placeholder='MSSV'
-                                keyboardType="numeric"
-                            />
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <TouchableOpacity
-                                style={{ backgroundColor: 'transparent', paddingLeft: 30 }}
-                                onPress={this.search_function}
-                            >
-                                <Image source={require('../search_icon.png')} />
-                            </TouchableOpacity>
-                        </View>
-                    </View >
-                    <Text>Hệ thống phân quyền sẽ được làm mới vào 00:00 hằng ngày</Text>
                 </ScrollView >
             )
         }
@@ -416,6 +315,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#ccc",
     },
+    roleAssignContainer: {
+        marginTop: 0,
+        padding: 20,
+        backgroundColor: 'transparent'
+    }
+    ,
     scrollContainer: {
         paddingLeft: 20,
         paddingRight: 20,
@@ -470,7 +375,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 10,
         flexDirection: 'row',
-        margin: 20,
+        marginLeft: 15,
+        marginRight: 15,
         padding: 10,
     },
     txtAssign: {
@@ -501,5 +407,10 @@ const styles = StyleSheet.create({
     },
     spinnerTextStyle: {
         color: '#FFF'
+    },
+    warning: {
+        color: '#ff0000',
+        fontSize: 12,
+        padding: 20,
     },
 });

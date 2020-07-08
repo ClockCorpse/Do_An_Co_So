@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Alert,
+  PermissionsAndroid,
 } from 'react-native';
 
 import {
@@ -24,17 +25,12 @@ import {
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
 import BarcodeMask from 'react-native-barcode-mask';
-
+import moment from 'moment'
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import { Base64 } from 'js-base64';
 
 console.disableYellowBox = true;
 
-//Once the QR code is detected, navigate to the confirmation screen with the information extracted from the code
-
-
-// export default function App() {
-//   return (
 export default class App extends Component {
   constructor() {
     super();
@@ -48,6 +44,8 @@ export default class App extends Component {
       lop: '',
       email: '',
       eventID: '',
+      curTime: '',
+      dueTime: '',
 
     };
   }
@@ -65,6 +63,12 @@ export default class App extends Component {
     this.setState({ lop: value });
     var value = await AsyncStorage.getItem('email');
     this.setState({ email: value });
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA, {
+      'title': 'CameraExample App Camera Permission',
+      'message': 'CameraExample App needs access to your camera '
+    }
+    )
   }
 
   onBarcodeScan(qrvalue) {
@@ -73,11 +77,12 @@ export default class App extends Component {
     try {
       this.setState({ qrvalue: JSON.parse(Base64.decode(qrvalue)) });
       let temp = JSON.parse(Base64.decode(qrvalue));
-      this.setState({eventID:temp['eventID']});
+      this.setState({ eventID: temp['eventID'] });
+      this.setState({ dueTime: temp['time'] })
     } catch (err) {
       return;
     }
-    this.setState({ openScanner: false});
+    this.setState({ openScanner: false });
   }
 
   onOpenScanner() {
@@ -86,6 +91,8 @@ export default class App extends Component {
   }
   confirm() {
     NetInfo.fetch().then(state => {
+      var due = Date.parse(this.state.dueTime);
+      var cur = Date.parse(moment().utcOffset('+07:00').format('DD/MM/YYYY HH:mm'));
       if (state.isConnected === true) {
         // If theres a connection then fetch the api
         fetch('http://dacs.xyz/attendance.php', {
@@ -98,29 +105,33 @@ export default class App extends Component {
           body: JSON.stringify({
 
             mssv: this.state.mssv,
-            ten:this.state.ten,
-            tenLot:this.state.tenLot,
-            email:this.state.email,
+            ten: this.state.ten,
+            tenLot: this.state.tenLot,
+            email: this.state.email,
             lop: this.state.lop,
-            eventID:this.state.eventID,
+            eventID: this.state.eventID,
+            due: this.state.dueTime,
           })
 
         }).then((response) => response.json()) // Get Json response
           .then((responseJson) => {
             if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
-              Alert.alert(responseJson);
+              Alert.alert('Thông báo','Thành công!');
               console.log(responseJson);
               this.props.navigation.navigate('Profile');
-            } else {
+            } else if(responseJson === 'Duplicated') {
               console.log(responseJson);
-              Alert.alert(responseJson);//if not then alert the user
+              Alert.alert('Thông báo','Chỉ được điểm danh 1 lần.');
+            }else if(responseJson === 'Late'){
+              Alert.alert('Thông báo','Đã hết hạn!');
             }
 
           }).catch((error) => {
             console.error(error);
           });
+
       } else {
-        Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+        Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
       }
     });
   }
@@ -161,6 +172,10 @@ export default class App extends Component {
                   <Text style={styles.infoHeader}>Mã sự kiện</Text>
                   <Text style={styles.info}>{this.state.eventID}</Text>
                 </View>
+                <View style={styles.container}>
+                  <Text style={styles.infoHeader}>Hạn điểm danh</Text>
+                  <Text style={styles.info}>{this.state.dueTime}</Text>
+                </View>
               </View>
               : null
             }
@@ -194,7 +209,7 @@ export default class App extends Component {
     return (
 
       <View style={{ flex: 1 }}>
-        
+
         <CameraKitCameraScreen
           showFrame={false}
           //Show/hide scan frame
@@ -211,39 +226,9 @@ export default class App extends Component {
           }
         />
         <BarcodeMask width={250}
-         height={250}
-         transparency={0.3} />
+          height={250}
+          transparency={0.3} />
       </View>
-
-      // <View style={styles.container}>
-      //   <RNCamera
-      //      ref={ref => {
-      //        this.camera = ref;
-      //      }}
-      //      style={{
-      //        flex: 1,
-      //        width: '100%',
-      //        ...StyleSheet.absoluteFill,
-      //      }}
-      //      onGoogleVisionBarcodesDetected={this.barcodeRecognized}
-      //    >
-      //    </RNCamera>
-      //    <View style={styles.qrArea}></View>
-      //    <View style={{width: width/2,height: width/2,backgroundColor:'white',opacity:0.1}}></View>
-      //    <View style={styles.qrArea1}>
-      //        <View style={styles.qrArea2}>
-      //          <View style={{flex:1,borderTopWidth:4,borderLeftWidth:4,borderColor:'#fff',borderRadius:3}}></View>
-      //          <View style={{flex:1}}></View>
-      //          <View style={{flex:1,borderTopWidth:4,borderRightWidth:4,borderColor:'#fff',borderRadius:3}}></View>
-      //        </View>
-      //        <View style={{flex:1}}></View>
-      //        <View style={styles.qrArea2}>
-      //         <View style={{flex:1,borderBottomWidth:4,borderLeftWidth:4,borderColor:'#fff',borderRadius:3}}></View>
-      //          <View style={{flex:1}}></View>
-      //          <View style={{flex:1,borderBottomWidth:4,borderRightWidth:4,borderColor:'#fff',borderRadius:3}}></View>
-      //        </View>
-      //     </View>
-      // </View>
     );
   }
 }

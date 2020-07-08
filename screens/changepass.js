@@ -91,11 +91,11 @@ export default class App extends Component {
             .then((responseJson) => {
               if (responseJson === 'Changecomplete') {// If the change was success then navigates back to the login screen
                 this.setState({spinner:false});
-                Alert.alert(responseJson);
+                Alert.alert('Thông báo','Đổi thành công');
                 this.props.navigation.navigate('Default');
               } else {
                 this.setState({spinner:false});
-                Alert.alert(responseJson);//if not then alert the user
+                Alert.alert('Thông báo','Đổi thất bại');//if not then alert the user
               }
 
             }).catch((error) => {
@@ -103,11 +103,11 @@ export default class App extends Component {
             });
         } else {
           this.setState({spinner:false});
-          Alert.alert('Mật khẩu quá ngắn hoặc xác nhận mật khẩu không chính xác');
+          Alert.alert('Thông báo','Mật khẩu quá ngắn hoặc xác nhận mật khẩu không chính xác');
         }
       } else {
         this.setState({spinner:false});
-        Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+        Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
       }
     });
   }

@@ -64,28 +64,28 @@ export default class App extends Component {
                             .then((responseJson) => {
                                 if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                                     this.setState({ spinner: false });
-                                    Alert.alert('Thành công');
+                                    Alert.alert('Thông báo','Thành công');
                                     console.log(responseJson);
                                     this.props.navigation.navigate('Profile');
                                 } else {
                                     this.setState({ spinner: false });
                                     console.log(responseJson);
-                                    Alert.alert('Thất bại');//if not then alert the user
+                                    Alert.alert('Thông báo','Thất bại');//if not then alert the user
                                 }
                             }).catch((error) => {
                                 console.error(error);
                             });
                     } else {
                         this.setState({ spinner: false });
-                        Alert.alert('Không có kết nối internet');//if there's no connection to the Internet then alert the user
+                        Alert.alert('Thông báo','Không có kết nối internet');//if there's no connection to the Internet then alert the user
                     }
                 });
             }else{
-                Alert.alert('Xin nhập hạn điểm danh');
+                Alert.alert('Thông báo','Xin nhập hạn điểm danh');
             }
         }
         else {
-            Alert.alert('Tên sự kiện không được phép trống.');
+            Alert.alert('Thông báo','Tên sự kiện không được phép trống.');
         }
     }
 
@@ -104,6 +104,13 @@ export default class App extends Component {
         this.setState({
             isVisible: false
         })
+    }
+    backFunction = ()=>{
+        if(this.state.role === '1'){
+            this.props.navigation.navigate('Dashboard');
+        }else{
+            this.props.navigation.navigate('Profile');
+        }
     }
     render() {
         return (
@@ -149,7 +156,7 @@ export default class App extends Component {
 
                         <TouchableOpacity
                             style={styles.btn}
-                            onPress={() => this.props.navigation.navigate('Profile')}>
+                            onPress={this.backFunction}>
                             <Text style={styles.btnText} >Quay lại</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
