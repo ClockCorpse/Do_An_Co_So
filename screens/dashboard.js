@@ -93,7 +93,7 @@ export default class App extends Component {
                     .then((responseJson) => {
                         if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                             this.setState({ spinner: false });
-                            Alert.alert('Thông báo','Thành công!')
+                            Alert.alert('Thông báo','Cấp quyền thành công!')
                         } else {
                             this.setState({ spinner: false });
                             Alert.alert('Thông báo','Cấp quyền thất bại!');//if not then alert the user
@@ -170,7 +170,7 @@ export default class App extends Component {
                         console.log(responseJson);
                         if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                             this.setState({ spinner: false });
-                            Alert.alert('Thông báo','Thành công!')
+                            Alert.alert('Thông báo','Hệ thống sẽ gửi email trong giây lát.')
                         } else {
                             this.setState({ spinner: false });
                             Alert.alert('Thông báo','Thất bại!');//if not then alert the user

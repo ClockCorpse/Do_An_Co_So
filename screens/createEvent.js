@@ -64,7 +64,7 @@ export default class App extends Component {
                             .then((responseJson) => {
                                 if (responseJson === 'Success') {// If the change was success then navigates back to the login screen
                                     this.setState({ spinner: false });
-                                    Alert.alert('Thông báo','Thành công');
+                                    Alert.alert('Thông báo','Hệ thống sẽ gửi email trong giây lát.');
                                     console.log(responseJson);
                                     this.props.navigation.navigate('Profile');
                                 } else {

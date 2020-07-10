@@ -39,6 +39,9 @@ const screens = {
     },
     Dashboard:{
         screen: dashboard,
+        navigationOptions:{
+            headerShown:false,
+        }
     }
     
 }
